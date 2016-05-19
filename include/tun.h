@@ -12,9 +12,16 @@
 
 extern int tun_fd;
 
-bool tun_alloc(int flags);
-int cread(int fd, char *buf, int n);
-int cwrite(int fd, char *buf, int n);
-int read_n(int fd, char *buf, int n);
+#define TUNFLAGS IFF_TUN
+
+struct tunintf {
+    char tun_name[64];
+    char tun_ip[64];
+    char tun_route[64];
+    unsigned char tun_flags;
+};
+
+bool tun_alloc(struct tunintf *tunparam, int *fd);
+bool tun_close(struct tunintf *tunparam, int *fd);
 
 #endif //ISECVPN_TUN_H

@@ -2,7 +2,8 @@
 // Created by srbvsr on 4/16/16.
 //
 #include "../include/network.h"
-
+static int net_fd;
+static int data_fd;
 bool tcp_listen() {
 
     struct sockaddr_in sa_serv;
@@ -43,43 +44,62 @@ bool tcp_connect() {
 
     return true;
 }
+int udp_tunbind(int port, int *fd) {
 
-bool udp_connect() {
-
-    struct sockaddr_in sin, sout;
-    int sout_len, ret;
-    char MAGIC_WORD[] = "Wazaaaaaaaaaaahhhh";
-    char buf[1024];
+    struct sockaddr_in sin;
 
     // Initialize the UDP socket for data communication
-    if ((data_fd = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
-        PERROR("socket()");
+    if ((*fd = socket(PF_INET, SOCK_DGRAM, 0)) < 0) {
+        do_debug("UDP socket error\n");
+        return 0;
+    }
 
     memset(&sin, 0, sizeof(struct sockaddr_in));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = htonl(INADDR_ANY);
-    sin.sin_port = htons(config.data_port);
-    if (bind(data_fd, (struct sockaddr *)&sin, sizeof(sin)) < 0)
-        PERROR("bind()");
-
-    sout_len = sizeof(sout);
-    //Connect to server
-    sout.sin_family = AF_INET;
-    sout.sin_port = htons(config.data_port);
-    inet_aton(config.gateway, &sout.sin_addr);
-
-    ret = sendto(data_fd, MAGIC_WORD, sizeof(MAGIC_WORD), 0, (struct sockaddr *)&sout,
-              sizeof(sout));
-    if (ret < 0)
-        PERROR("sendto");
-
-    ret = recvfrom(data_fd, buf, sizeof(buf), 0, (struct sockaddr *)&sout, &sout_len);
-    if (ret < 0)
-        PERROR("recvfrom");
-
-    if (strncmp(MAGIC_WORD, buf, sizeof(MAGIC_WORD) != 0)) {
-        printf("Bad magic word for peer\n");
-        return false;
+    sin.sin_port = htons(port);
+    if (bind(*fd, (struct sockaddr *)&sin, sizeof(sin)) < 0) {
+        do_debug("UDP tun bind failed\n");
+        return 0;
     }
-    return true;
+    return 1;
 }
+bool udp_close(int *fd) {
+
+    bool ret = true;
+
+    if (close(*fd) < 0) {
+        do_debug("UDP socket close error\n");
+        ret = false;
+    }
+    return ret;
+}
+
+int hostname_to_ip(char *hostname , char *ip)
+{
+    int sockfd;
+    struct addrinfo hints, *servinfo, *p;
+    struct sockaddr_in *h;
+    int rv;
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC; // use AF_INET6 to force IPv6
+    hints.ai_socktype = SOCK_STREAM;
+
+    if ( (rv = getaddrinfo( hostname , "http" , &hints , &servinfo)) != 0)
+    {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+        return 1;
+    }
+
+    // loop through all the results and connect to the first we can
+    for(p = servinfo; p != NULL; p = p->ai_next)
+    {
+        h = (struct sockaddr_in *) p->ai_addr;
+        strcpy(ip , inet_ntoa( h->sin_addr ) );
+    }
+
+    freeaddrinfo(servinfo); // all done with this structure
+    return 0;
+}
+

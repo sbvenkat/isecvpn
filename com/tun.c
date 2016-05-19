@@ -54,37 +54,68 @@ void setip(const char *dev, const char *ipstr) {
  * tun_alloc: allocates or reconnects to a tun/tap device. The caller     *
  *            needs to reserve enough space in *dev.                      *
  **************************************************************************/
-bool tun_alloc(int flags) {
+bool tun_alloc(struct tunintf *tunparam, int *fd) {
 
     struct ifreq ifr;
     int err;
     char cmd[1024];
 
-    if ((tun_fd = open("/dev/net/tun", O_RDWR)) < 0) {
+    if ((*fd = open("/dev/net/tun", O_RDWR)) < 0) {
         perror("Opening /dev/net/tun");
         return false;
     }
 
     memset(&ifr, 0, sizeof(ifr));
+    ifr.ifr_flags = IFF_TUN;
+    sprintf(ifr.ifr_name, "%s", tunparam->tun_name);
 
-    ifr.ifr_flags = flags;
-
-    if (*config.tunintf) {
-        strncpy(ifr.ifr_name, config.tunintf, IFNAMSIZ);
-    }
-
-    if ((err = ioctl(tun_fd, TUNSETIFF, (void *) &ifr)) < 0) {
+    if ((err = ioctl(*fd, TUNSETIFF, (void *) &ifr)) < 0) {
         perror("ioctl(TUNSETIFF)");
-        close(tun_fd);
-        return err;
+        close(*fd);
+        return false;
     }
+    /* Assign IP address */
     memset(cmd, 0, 1024);
-    sprintf(cmd, "ip addr add %s dev %s", config.tunip, config.tunintf);
+    sprintf(cmd, "ip addr add %s dev %s", tunparam->tun_ip,
+                    tunparam->tun_name);
     system(cmd);
+
+    /* Start TUN dev */
     memset(cmd, 0, 1024);
-    sprintf(cmd, "ifconfig %s up", config.tunintf);
+    sprintf(cmd, "ifconfig %s up", tunparam->tun_name);
     system(cmd);
-    //strcpy(dev, ifr.ifr_name);
+
+    /* Add routes */
+    memset(cmd, 0, 1024);
+    sprintf(cmd, "ip route add %s dev %s", tunparam->tun_route,
+            tunparam->tun_name);
+    system(cmd);
+
+    /* Add routes */
+    //TODO
+
+    return true;
+}
+bool tun_close(struct tunintf *tunparam, int *fd) {
+
+    char cmd[1024];
+
+    /* Remove routes */
+    //TODO
+
+    /* Tun down */
+    memset(cmd, 0, 1024);
+    sprintf(cmd, "ifconfig %s down", tunparam->tun_name);
+    system(cmd);
+
+    /* Remove IP address */
+    memset(cmd, 0, 1024);
+    sprintf(cmd, "ip addr del %s dev %s", tunparam->tun_ip,
+            tunparam->tun_name);
+    system(cmd);
+
+    close(*fd);
+
     return true;
 }
 

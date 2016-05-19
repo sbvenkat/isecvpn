@@ -5,51 +5,70 @@
 #include "../include/util.h"
 #include "../include/network.h"
 
+void print_usage() {
+
+    printf("##################################\n");
+    printf("1. Client configuration\n");
+    printf("2. Start ISECVPN\n");
+    printf("3. Change SSL KEY\n");
+    printf("4. Stop ISECVPN\n");
+    printf("5. Exit ISECVPN\n");
+    printf("Action: ");
+    return;
+}
 int main(int argc, char *argv[]) {
 
-    struct sockaddr_in sin, sout, from;
-    const char *conf_file = "client.conf";
-    int recv, fromlen, soutlen;
+    char userinput[MAX_INPUT_LEN];
+    char username[80];
+    char passwd[80];
     char c;
-    fd_set fdset;
-    int DEBUG = 1;
+    size_t len;
 
-    init(conf_file);
-    ssl_client();
+    printf("##################################\n");
+    printf("       ISECVPN CLIENT             \n");
+    print_usage();
 
-}
-
-/*
-int test() {
+    memset(username, 0, 80);
+    memset(passwd, 0, 80);
     while (1) {
-        FD_ZERO(&fdset);
-        FD_SET(tap_fd, &fdset);
-        FD_SET(net_fd, &fdset);
-        if (select(tap_fd + net_fd + 1, &fdset, NULL, NULL, NULL) < 0)
-            PERROR("select");
-        if (FD_ISSET(tap_fd, &fdset)) {
-            if (DEBUG)
-                write(1,">", 1);
-            l = read(tap_fd, buf, sizeof(buf));
-            if (l < 0)
-                PERROR("read");
-            if (sendto(net_fd, buf, l, 0, (struct sockaddr *)&from, fromlen) < 0)
-                PERROR("sendto");
-        } else {
-            if (DEBUG)
-                write(1,"<", 1);
-            l = recvfrom(net_fd, buf, sizeof(buf), 0, (struct sockaddr *)&sout, &soutlen);
-
-            if ((sout.sin_addr.s_addr != from.sin_addr.s_addr) ||
-                (sout.sin_port != from.sin_port))
-                printf("Got packet from  %s:%i instead of %s:%i\n",
-                       inet_ntoa(sout.sin_addr), ntohs(sout.sin_port),
-                       inet_ntoa(from.sin_addr), ntohs(from.sin_port));
-
-            if (write(tap_fd, buf, l) < 0)
-                PERROR("write");
+        read_input(userinput);
+        switch (userinput[0]) {
+            case '1' :
+                printf("File name : ");
+                read_input(userinput);
+                /* Initialize config structure and SSL library */
+                vpn_init(userinput);
+                break;
+            case '2':
+                printf("User name : ");
+                read_input(userinput);
+                memcpy(username, userinput, strlen(userinput));
+                printf("Password : ");
+                read_passwd(userinput);
+                memcpy(passwd, userinput, strlen(userinput));
+                if(ssl_client(username, passwd))
+                    printf("ISECVPN TUN Established\n");
+                else
+                    printf("ISECVPN TUN Failed\n");
+                memset(passwd, 0, 80);
+                memset(username, 0, 80);
+                break;
+            case '3':
+                log_debug("Change PRE-SHARED KEY\n");
+                ssl_client_key_change();
+                break;
+            case '4':
+                printf("Tunnel tear down\n");
+                break;
+            case '5' :
+                printf("Exit ISECVPN\n");
+                ssl_client_exit();
+                exit(1);
+                break;
+            default:
+                break;
         }
+        print_usage();
     }
-    return 0;
 }
-*/
+

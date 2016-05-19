@@ -11,11 +11,15 @@
 #include <netdb.h>
 #include <netinet/in.h>
 
-int data_fd;    /* UDP file descriptor for data communication */
-int net_fd;     /* TCP file descriptor for control communication */
-
+struct datatunnel {
+    unsigned short dataport;
+    unsigned char  remoteip[20];
+    unsigned char client;
+};
+int udp_tunbind(int port, int *fd);
+int hostname_to_ip(char *hostname, char *ip);
+bool udp_close(int *fd);
 bool tcp_connect();
 bool tcp_listen();
-bool udp_connect();
 
 #endif //ISECVPN_NETWORK_H_H

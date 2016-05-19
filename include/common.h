@@ -20,5 +20,6 @@
 #include <arpa/inet.h>
 
 #define PERROR(x) do { perror(x); exit(1); } while (0)
+#define CHK_ERR_EXIT(x, s) if (x <= 0) { perror(s); exit(1); }
 
 #endif //ISECVPN_COMMON_H

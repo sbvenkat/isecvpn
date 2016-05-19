@@ -13,8 +13,9 @@
 #define MAX_OUT_NAME_LEN 256
 
 struct config_struct {
-    unsigned int ssl_port;
-    unsigned int data_port;
+    unsigned short ssl_port;
+    unsigned short data_port;
+    unsigned char hostname[100];
     unsigned char gateway[20];
     unsigned char tunintf[20];
     unsigned char tunip[20];
@@ -22,6 +23,7 @@ struct config_struct {
     unsigned char certfile[100];
     unsigned char keyfile[100];
     unsigned char cacertfile[100];
+    unsigned char servercn[100];
 };
 
 extern struct config_struct config;
