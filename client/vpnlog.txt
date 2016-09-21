@@ -1,0 +1,79 @@
+Connection established at 10.0.2.5:10034
+print_cert subject: /C=US/ST=NewYork/L=Syracuse/O=Seed Lab/OU=CSE644/CN=www.isecvpnlab.com/emailAddress=contact@isecvpnlab.com
+print_cert issuer: /C=US/ST=NewYork/O=Seed Lab/OU=ISECVPN/CN=Seed Inter CA/emailAddress=interca@isecvpn.com
+isecvpnlab.com Certificate Common Name validation success
+ssl_client_init_vpn: MSG AUTH REQ SENT alice
+ssl_client_init_vpn: MSG KEY EXCH sent
+ssl_client_init_vpn: MSG KEY EXCH RESP ACK
+ssl_client_init_vpn: MSG TUN UP SENT
+ssl_client_init_vpn: MSG TUN UP RESP ACK
+datapath_process: Recv MSG DATATUN_KEYIV
+4BFFFFFFDD1A51FFFFFFA443FFFFFFD07A0FFFFFFF8FFFFFFE94EFFFFFFED33FFFFFFBCFFFFFFFD
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.2/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 10.0.2.5
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.5:10034
+print_cert subject: /C=US/ST=NewYork/L=Syracuse/O=Seed Lab/OU=CSE644/CN=www.isecvpnlab.com/emailAddress=contact@isecvpnlab.com
+print_cert issuer: /C=US/ST=NewYork/O=Seed Lab/OU=ISECVPN/CN=Seed Inter CA/emailAddress=interca@isecvpn.com
+isecvpnlab.com Certificate Common Name validation success
+ssl_client_init_vpn: MSG AUTH REQ SENT alice
+ssl_client_init_vpn: MSG KEY EXCH sent
+ssl_client_init_vpn: MSG KEY EXCH RESP ACK
+ssl_client_init_vpn: MSG TUN UP SENT
+ssl_client_init_vpn: MSG TUN UP RESP ACK
+datapath_process: Recv MSG DATATUN_KEYIV
+FFFFFFF566FFFFFFFE4D1F4CFFFFFFF3FFFFFFE5FFFFFF881AFFFFFFBBFFFFFF9913547514
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.2/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 10.0.2.5
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.5:10034
+print_cert subject: /C=US/ST=NewYork/L=Syracuse/O=Seed Lab/OU=CSE644/CN=www.isecvpnlab.com/emailAddress=contact@isecvpnlab.com
+print_cert issuer: /C=US/ST=NewYork/O=Seed Lab/OU=ISECVPN/CN=Seed Inter CA/emailAddress=interca@isecvpn.com
+isecvpnlab.com Certificate Common Name validation success
+ssl_client_init_vpn: MSG AUTH REQ SENT alice
+ssl_client_init_vpn: MSG KEY EXCH sent
+ssl_client_init_vpn: MSG KEY EXCH RESP ACK
+ssl_client_init_vpn: MSG TUN UP SENT
+ssl_client_init_vpn: MSG TUN UP RESP ACK
+datapath_process: Recv MSG DATATUN_KEYIV
+38FFFFFFF073FFFFFFECFFFFFFC8556AFFFFFF81FFFFFF897CFFFFFFE610FFFFFFE301EFFFFFFFD
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.2/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 10.0.2.5
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.5:10034
+ssl_verify_cert Certificate Verification Falied
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK
+Connection established at 10.0.2.5:10034
+ssl_verify_cert Certificate Verification Falied
+Connection established at 10.0.2.5:10034
+ssl_verify_cert Certificate Verification Falied
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK
+Connection established at 10.0.2.5:10034
+ssl_verify_cert Certificate Verification Falied
+Connection established at 10.0.2.5:10034
+ssl_verify_cert Certificate Verification Falied
+ssl_client_down_vpn MSG TUN DOWN SENT
+ssl_client_down_vpn MSG TUN DOWN RESP ACK

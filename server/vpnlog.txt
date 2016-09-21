@@ -1,0 +1,81 @@
+Connection established at 10.0.2.4:46130
+listen_msg MSG RCV type 1, len 15
+listen_msg SSL read msg 1 bytes 15
+process_msg: Recv MSG CLIENT AUTH REQ
+ssl_validate_user User verification request for alice
+listen_msg MSG RCV type 2, len 17
+listen_msg SSL read msg 2 bytes 17
+process_msg: Recv MSG KEY Exch
+set_sslparam_key KEY received
+4BFFFFFFDD1A51FFFFFFA443FFFFFFD07A0FFFFFFF8FFFFFFE94EFFFFFFED33FFFFFFBCFFFFFFFD
+listen_msg MSG RCV type 32, len 0
+process_msgtype Recv TUN  UP message
+datapath_process: Recv MSG DATATUN_KEYIV
+4BFFFFFFDD1A51FFFFFFA443FFFFFFD07A0FFFFFFF8FFFFFFE94EFFFFFFED33FFFFFFBCFFFFFFFD
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.1/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 
+listen_msg MSG RCV type 64, len 0
+process_msgtype RECV TUN down message
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.4:46131
+listen_msg MSG RCV type 1, len 15
+listen_msg SSL read msg 1 bytes 15
+process_msg: Recv MSG CLIENT AUTH REQ
+ssl_validate_user User verification request for alice
+listen_msg MSG RCV type 2, len 17
+listen_msg SSL read msg 2 bytes 17
+process_msg: Recv MSG KEY Exch
+set_sslparam_key KEY received
+FFFFFFF566FFFFFFFE4D1F4CFFFFFFF3FFFFFFE5FFFFFF881AFFFFFFBBFFFFFF9913547514
+listen_msg MSG RCV type 32, len 0
+process_msgtype Recv TUN  UP message
+datapath_process: Recv MSG DATATUN_KEYIV
+FFFFFFF566FFFFFFFE4D1F4CFFFFFFF3FFFFFFE5FFFFFF881AFFFFFFBBFFFFFF9913547514
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.1/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 
+listen_msg MSG RCV type 64, len 0
+process_msgtype RECV TUN down message
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.4:46132
+listen_msg MSG RCV type 1, len 15
+listen_msg SSL read msg 1 bytes 15
+process_msg: Recv MSG CLIENT AUTH REQ
+ssl_validate_user User verification request for alice
+listen_msg MSG RCV type 2, len 17
+listen_msg SSL read msg 2 bytes 17
+process_msg: Recv MSG KEY Exch
+set_sslparam_key KEY received
+38FFFFFFF073FFFFFFECFFFFFFC8556AFFFFFF81FFFFFF897CFFFFFFE610FFFFFFE301EFFFFFFFD
+listen_msg MSG RCV type 32, len 0
+process_msgtype Recv TUN  UP message
+datapath_process: Recv MSG DATATUN_KEYIV
+38FFFFFFF073FFFFFFECFFFFFFC8556AFFFFFF81FFFFFF897CFFFFFFE610FFFFFFE301EFFFFFFFD
+datapath_process: Recv MSG DATATUN_INIT
+datapath_process: TUN PARAM 20.1.1.1/24, tun0
+datapath_process: Recv DATATUN_START
+datapath_process: Datapath on Port 8888, IP 
+listen_msg MSG RCV type 64, len 0
+process_msgtype RECV TUN down message
+datapath_process:238 Datapath end msg recv
+datatun_end Stop encypt decrypt thread 
+datatun_end Stop tunnel
+datatun_end Stop UDP
+Connection established at 10.0.2.4:46133
+listen_msg MSG RCV type 64, len 0
+process_msgtype RECV TUN down message
+Connection established at 10.0.2.4:46134
+Connection established at 10.0.2.4:46135
+listen_msg MSG RCV type 64, len 0
+process_msgtype RECV TUN down message
+Connection established at 10.0.2.4:46136
+Connection established at 10.0.2.4:46137
